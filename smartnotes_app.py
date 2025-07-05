@@ -5,10 +5,11 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, firestore
 import uuid
+import json  # <-- Add this
 
 # Firebase initialization
 if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase-service-account.json")
+    cred = credentials.Certificate(json.loads(json.dumps(st.secrets["firebase"])))
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
