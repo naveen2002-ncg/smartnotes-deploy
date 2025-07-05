@@ -1,15 +1,11 @@
-
-# SmartNotes: Note-Taking App using Python + Streamlit + Firebase
-
 import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, firestore
 import uuid
-import json  # <-- Add this
 
 # Firebase initialization
 if not firebase_admin._apps:
-    cred = credentials.Certificate(json.loads(json.dumps(st.secrets["firebase"])))
+    cred = credentials.Certificate(dict(st.secrets["firebase"]))
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
